@@ -1,1 +1,3 @@
 rrodrigues_ergo
+*.pyc
+.DS_Store
