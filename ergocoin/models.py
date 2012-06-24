@@ -1,5 +1,5 @@
 from django.db import models
-#-*- coding: utf-8 -*#-
+# coding: utf-8
 
 class Criterios_ergonomicos(models.Model):
 	criterio = models.CharField('Criério', max_length=100)
@@ -11,31 +11,35 @@ class Criterios_ergonomicos(models.Model):
 	
 	def __unicode__(self):
 		return self.criterio
-"""
+
 class Tipo(models.Model):
 	TIPO_CHOICES = (
-		('SIMNAO', (
-			('sim', 'Sim'),
-			('nao','Não'),
-			)
-		),
-		( 'GRADUADA', (
-			('0', '0'),
-			('1', '1'),
-			('2', '2'),
-			('3', '3'),
-			('4', '4'),
-			('5', '5'),
-			)
-		),
+		('SN', "Sim ou Não"),
+		( 'GRD', "Graduada"),
 	)
 	
-	valor = models.CharField(choices = TIPO_CHOICES, max_length=3)
-	tipo = models.CrarField(choices = TIPO_CHOICES, max-length=3)
+	tipo = models.CharField(choices = TIPO_CHOICES, max_length=3)
+
+	def __unicode__(self):
+		return self.tipo
+
+class Valor(models.Model):
+	VALOR_CHOICES = (
+		('s', 'Sim'),
+		('n','Não'),
+		('0', '0'),
+		('1', '1'),
+		('2', '2'),
+		('3', '3'),
+		('4', '4'),
+		('5', '5'),
+	)
+	
+	valor = models.CharField(choices = VALOR_CHOICES, max_length=1)
 
 	def __unicode__(self):
 		return self.valor
-	"""	
+
 class Elementos_de_interacao(models.Model):
 	nome = models.CharField('Nome', max_length=100)
 	
@@ -50,8 +54,8 @@ class Questoes(models.Model):
 	criterio_ergonomico = models.ForeignKey(Criterios_ergonomicos)
 	enumciado = models.CharField('enumciado', max_length=200)
 	descricao = models.TextField('Descrição',)
-	#valor = models.ForeignKey(Tipo)
-	#tipo = models.CharField()
+	tipo = models.ForeignKey(Tipo)
+	valor = models.ForeignKey(Valor)
 	elementos_de_interacao_associados = models.ForeignKey(Elementos_de_interacao)
 	
 	def __unicode__(self):
